@@ -1,4 +1,3 @@
-
 var url = require('url'),
  	restify = require('restify'),
  	request = require('request'),
@@ -17,7 +16,7 @@ exports.createServer = function(port) {
 		res.header("Access-Control-Allow-Origin", "*");
     	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
-		winston.info('Incoming Request', {url: req.url});
+		winston.info('Incoming Request', JSON.stringify(req.params));
 
 	    var options = req.params;
 
@@ -25,7 +24,10 @@ exports.createServer = function(port) {
 	    	res.send(400, new Error('Bad json options sent.. requires { "url": "http://urltopdf.com"}'))
 	    }
 
-	    res.header('Content-Type', 'application/pdf');
+		options.fileName = options.fileName || "report.pdf";	    
+
+		res.header('Content-disposition', 'attachment; filename=' + options.fileName);
+		res.header('Content-Type', 'application/pdf');
 
 	 	winston.info('Retrieving HTML from ' + options.url);
 
