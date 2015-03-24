@@ -1,9 +1,11 @@
+
 var url = require('url'),
  	restify = require('restify'),
  	request = require('request'),
 	winston	 = require('winston'),
-	wkhtmltox = require('wkhtmltox'),
-	converter = new wkhtmltox();
+	converter = require('wkhtmltopdf');
+	//wkhtmltox = require('wkhtmltopdf'),
+	//converter = new wkhtmltox();
 
 exports.createServer = function(port) {
 	var server = restify.createServer();
@@ -36,7 +38,8 @@ exports.createServer = function(port) {
 
 	 	winston.info('With PDF options ' + JSON.stringify(pdfOptions));
 
-	 	converter.pdf(request.get(options.url), pdfOptions).pipe(res);
+	 	//converter.pdf(request.get(options.url), pdfOptions).pipe(res);
+ 		converter(options.url, pdfOptions).pipe(res);
 
 	    
 	});
