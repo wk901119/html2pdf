@@ -1,0 +1,29 @@
+{
+  "name": "html2pdf",
+  "version": "0.0.1",
+  "description": "node based api for generating pdf files from urls using wkhtmltopdf",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/galenp/html2pdf.git"
+  },
+  "keywords": [
+    "node",
+    "wkhtmltopdf",
+    "api"
+  ],
+  "author": "Galen Parker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/galenp/html2pdf/issues"
+  },
+  "dependencies": {
+    "wkhtmltopdf": "~0.1.5",
+    "wkhtmltox": "~1.0.4",
+    "http": "0.0.0",
+    "url": "~0.10.3"
+  }
+}
