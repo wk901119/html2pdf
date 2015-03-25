@@ -4,15 +4,14 @@ var url = require('url'),
  	request = require('request'),
 	winston	 = require('winston'),
 	converter = require('wkhtmltopdf');
-	//wkhtmltox = require('wkhtmltopdf'),
-	//converter = new wkhtmltox();
-
+	
 exports.createServer = function(port) {
 	var server = restify.createServer();
 
 	server.use(restify.bodyParser());
 	server.use(restify.CORS());
 
+	
 	server.post('/', function create(req, res, next) {
 
 		res.header("Access-Control-Allow-Origin", "*");
@@ -24,6 +23,7 @@ exports.createServer = function(port) {
 
 	    if (!options || !options.url || !isUrl(options.url)) {
 	    	res.send(400, new Error('Bad json options sent.. requires { "url": "http://urltopdf.com"}'))
+	    	winston.info('Bad Options: ' + JSON.stringify(options));
 	    }
 
 		options.fileName = options.fileName || "report.pdf";	    
@@ -43,7 +43,7 @@ exports.createServer = function(port) {
 
 	    
 	});
-    
+    	
 	if (port) {
 		server.listen(port);
 	}
